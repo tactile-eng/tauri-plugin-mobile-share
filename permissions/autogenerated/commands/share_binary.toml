@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-share-binary"
+description = "Enables the share_binary command without any pre-configured scope."
+commands.allow = ["share_binary"]
+
+[[permission]]
+identifier = "deny-share-binary"
+description = "Denies the share_binary command without any pre-configured scope."
+commands.deny = ["share_binary"]
