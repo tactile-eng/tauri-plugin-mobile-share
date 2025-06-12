@@ -44,47 +44,33 @@ class SharePlugin: Plugin {
     }
 
     func baseShare(_ invoke: Invoke, _ items: [Any]) {
-        let response = { () -> Void in invoke.resolve(true) }
-        let reject = { () -> Void in invoke.reject("could not access main ViewController") }
+        let completionHandler = {
+            (_: UIActivity.ActivityType?, completed: Bool, _: [Any]?, maybeError: (any Error)?)
+                -> Void in
+            if let error = maybeError {
+                invoke.reject("failed to share data...")
+            } else {
+                invoke.resolve(completed)
+            }
+        }
+
+        let activityViewController = UIActivityViewController(
+            activityItems: items, applicationActivities: nil
+        )
+
+        activityViewController.completionWithItemsHandler = completionHandler
 
         DispatchQueue.main.async {
             guard let viewController = self.manager.viewController else {
-                reject()
+                invoke.reject("could not access main ViewController")
                 return
             }
 
             viewController.present(
-                UIActivityViewController(
-                    activityItems: items,
-                    applicationActivities: nil
-                ),
-                animated: true,
-                completion: { () -> Void in response() }
+                activityViewController, animated: true, completion: nil
             )
         }
-
-        // await withCheckedContinuation { continuation in
-        //     dispatch(items) { res in continuation.resume(returning: res) }
-        // } ? response() : reject()
     }
-
-    // func dispatch(_ items: [Any], completion: @escaping (Bool) -> Void) {
-    //     DispatchQueue.main.async {
-    //         guard let viewController = self.manager.viewController else {
-    //             completion(false)
-    //             return
-    //         }
-
-    //         viewController.present(
-    //             UIActivityViewController(
-    //                 activityItems: items,
-    //                 applicationActivities: nil
-    //             ),
-    //             animated: true,
-    //             completion: { () -> Void in completion(true) }
-    //         )
-    //     }
-    // }
 }
 
 @_cdecl("init_plugin_test")
