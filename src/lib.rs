@@ -6,20 +6,20 @@ use tauri::{
 };
 
 #[cfg(target_os = "ios")]
-tauri::ios_plugin_binding!(init_plugin_test);
+tauri::ios_plugin_binding!(init_plugin_mobile_share);
 
-pub struct Test<R: Runtime>(PluginHandle<R>);
+pub struct MobileShare<R: Runtime>(PluginHandle<R>);
 
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
-    Builder::new("test")
+    Builder::new("mobile-share")
         .setup(|app, api| {
             #[cfg(target_os = "android")]
             let handle = api.register_android_plugin("", "ExamplePlugin")?;
             #[cfg(target_os = "ios")]
-            let handle = api.register_ios_plugin(init_plugin_test)?;
+            let handle = api.register_ios_plugin(init_plugin_mobile_share)?;
 
-            app.manage(Test(handle));
+            app.manage(MobileShare(handle));
             Ok(())
         })
         .build()

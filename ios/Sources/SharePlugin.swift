@@ -18,7 +18,7 @@ class ShareBinary: Decodable {
     let meta: ShareMeta
 }
 
-class SharePlugin: Plugin {
+class MobileShare: Plugin {
     @objc public func shareText(_ invoke: Invoke) throws {
         let args = try invoke.parseArgs(ShareText.self)
         let url = storeTempWithUrl(args.meta)
@@ -73,7 +73,7 @@ class SharePlugin: Plugin {
     }
 }
 
-@_cdecl("init_plugin_test")
+@_cdecl("init_plugin_mobile_share")
 func initPlugin() -> Plugin {
-    return SharePlugin()
+    return MobileShare()
 }
