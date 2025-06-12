@@ -1,12 +1,12 @@
+#![cfg(mobile)]
+
 use tauri::{
-    plugin::{Builder, TauriPlugin},
+    plugin::{Builder, PluginHandle, TauriPlugin},
     Manager, Runtime,
 };
 
-pub use models::*;
+// pub use models::*;
 
-#[cfg(desktop)]
-mod desktop;
 #[cfg(mobile)]
 mod mobile;
 
@@ -16,32 +16,32 @@ mod models;
 
 pub use error::{Error, Result};
 
-#[cfg(desktop)]
-use desktop::MobileShare;
-#[cfg(mobile)]
-use mobile::MobileShare;
+#[cfg(target_os = "ios")]
+tauri::ios_plugin_binding!(init_plugin_test);
 
 /// Extensions to [`tauri::App`], [`tauri::AppHandle`] and [`tauri::Window`] to access the test APIs.
 pub trait TestExt<R: Runtime> {
-    fn test(&self) -> &MobileShare<R>;
+    fn test(&self) -> &Test<R>;
 }
 
 impl<R: Runtime, T: Manager<R>> crate::TestExt<R> for T {
-    fn test(&self) -> &MobileShare<R> {
-        self.state::<MobileShare<R>>().inner()
+    fn test(&self) -> &Test<R> {
+        self.state::<Test<R>>().inner()
     }
 }
 
+pub struct Test<R: Runtime>(PluginHandle<R>);
+
 /// Initializes the plugin.
 pub fn init<R: Runtime>() -> TauriPlugin<R> {
-    Builder::new("mobile_share")
-        .invoke_handler(tauri::generate_handler![commands::share_text, commands::share_binary])
+    Builder::new("test")
         .setup(|app, api| {
-            #[cfg(mobile)]
-            let mobile_share = mobile::init(app, api)?;
-            #[cfg(desktop)]
-            let mobile_share = desktop::init(app, api)?;
-            app.manage(mobile_share);
+            #[cfg(target_os = "android")]
+            let handle = api.register_android_plugin("", "ExamplePlugin")?;
+            #[cfg(target_os = "ios")]
+            let handle = api.register_ios_plugin(init_plugin_test)?;
+
+            app.manage(Test(handle));
             Ok(())
         })
         .build()

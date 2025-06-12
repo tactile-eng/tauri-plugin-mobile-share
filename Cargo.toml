@@ -1,12 +1,12 @@
 [package]
-name = "tauri-plugin-mobile-share"
+name = "tauri-plugin-test"
 version = "0.1.0"
 authors = [ "You" ]
 description = ""
 edition = "2021"
 rust-version = "1.77.2"
 exclude = ["/examples", "/dist-js", "/guest-js", "/node_modules"]
-links = "tauri-plugin-mobile-share"
+links = "tauri-plugin-test"
 
 [dependencies]
 tauri = { version = "2.5.0" }

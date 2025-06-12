@@ -19,7 +19,7 @@ Default permissions for the plugin
 <tr>
 <td>
 
-`mobile-share:allow-share`
+`test:allow-share`
 
 </td>
 <td>
@@ -32,7 +32,7 @@ Enables the share command without any pre-configured scope.
 <tr>
 <td>
 
-`mobile-share:deny-share`
+`test:deny-share`
 
 </td>
 <td>
@@ -45,7 +45,7 @@ Denies the share command without any pre-configured scope.
 <tr>
 <td>
 
-`mobile-share:allow-share-binary`
+`test:allow-share-binary`
 
 </td>
 <td>
@@ -58,7 +58,7 @@ Enables the share_binary command without any pre-configured scope.
 <tr>
 <td>
 
-`mobile-share:deny-share-binary`
+`test:deny-share-binary`
 
 </td>
 <td>
@@ -71,7 +71,7 @@ Denies the share_binary command without any pre-configured scope.
 <tr>
 <td>
 
-`mobile-share:allow-share-text`
+`test:allow-share-text`
 
 </td>
 <td>
@@ -84,7 +84,7 @@ Enables the share_text command without any pre-configured scope.
 <tr>
 <td>
 
-`mobile-share:deny-share-text`
+`test:deny-share-text`
 
 </td>
 <td>

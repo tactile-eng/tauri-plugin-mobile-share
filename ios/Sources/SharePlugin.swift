@@ -44,9 +44,12 @@ class SharePlugin: Plugin {
     }
 
     func baseShare(_ invoke: Invoke, _ items: [Any]) {
+        let response = { () -> Void in invoke.resolve(true) }
+        let reject = { () -> Void in invoke.reject("could not access main ViewController") }
+
         DispatchQueue.main.async {
             guard let viewController = self.manager.viewController else {
-                invoke.reject("could not access main ViewController")
+                reject()
                 return
             }
 
@@ -56,13 +59,35 @@ class SharePlugin: Plugin {
                     applicationActivities: nil
                 ),
                 animated: true,
-                completion: { () -> Void in invoke.resolve(true) }
+                completion: { () -> Void in response() }
             )
         }
+
+        // await withCheckedContinuation { continuation in
+        //     dispatch(items) { res in continuation.resume(returning: res) }
+        // } ? response() : reject()
     }
+
+    // func dispatch(_ items: [Any], completion: @escaping (Bool) -> Void) {
+    //     DispatchQueue.main.async {
+    //         guard let viewController = self.manager.viewController else {
+    //             completion(false)
+    //             return
+    //         }
+
+    //         viewController.present(
+    //             UIActivityViewController(
+    //                 activityItems: items,
+    //                 applicationActivities: nil
+    //             ),
+    //             animated: true,
+    //             completion: { () -> Void in completion(true) }
+    //         )
+    //     }
+    // }
 }
 
-@_cdecl("init_plugin_mobile_share")
+@_cdecl("init_plugin_test")
 func initPlugin() -> Plugin {
     return SharePlugin()
 }
