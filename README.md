@@ -3,7 +3,7 @@
 | Platform | Supported |
 | -------- | --------- |
 | iOS      | ✓         |
-| Android  | ?         |
+| Android  | x         |
 | Linux    | x         |
 | Windows  | x         |
 | macOS    | x         |
@@ -50,9 +50,10 @@ shareText(textData, { name: "My File", ext: "txt" });
 shareBinary(binaryData, { name: "My File", ext: "png" });
 ```
 
-## On Android (`?`) Support
+## TODO
 
-Obviously, we should support Android, but at the momemnt, only iOS is supported. To the best of our knowledge, there shouldn't be any techncial issue with adding Android support, and encourage anyone to do so!
+- [ ] Add Android Support
+- [ ] Simplify JS guest bindings
 
 ## Acknowledgements
 

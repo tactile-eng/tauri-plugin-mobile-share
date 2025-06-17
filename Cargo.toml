@@ -4,10 +4,9 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.85.0"
 description = "A Package for Sharing Tauri Mobile App Content"
-readme = true
 repository = "https://github.com/tactile-eng/tauri-plugin-mobile-share"
 license = "MIT OR Apache-2.0"
-keywords = ["tauri", "mobile", "ios", "android", "share"]
+keywords = ["tauri", "mobile", "ios", "share"]
 exclude = ["/examples", "/dist-js", "/guest-js", "/node_modules"]
 links = "tauri-plugin-mobile-share"
 

@@ -6,7 +6,6 @@
     "tauri",
     "mobile",
     "ios",
-    "android",
     "share"
   ],
   "bugs": "https://github.com/tactile-eng/tauri-plugin-mobile-share/issues",
