@@ -10,7 +10,7 @@
 
 ## Purpose
 
-This project exists to allow for a simple and convenient way to leverage the "share" functionality of mobile platforms, which in some cases (_*cough*_ iOS _*cough*_) is the only meaningful way to save data to a user's device. Of course, there is the option of simply using the Web Share API standard, which will let you interact with said functionality with zero imports and should work in almost every circumstance. Should you find yourself in need of something else, hopefully this project will be of use.
+This project exists to allow for a simple and convenient way to leverage the "share" functionality of mobile platforms, which in some cases (_*cough*_ iOS _*cough*_) is the only meaningful way to save data to a user's device. Of course, there is the option of simply using the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API) standard, which will let you interact with said functionality with zero imports and should work in almost every circumstance. Should you find yourself in need of something else, hopefully this project will be of use.
 
 ## Install
 
