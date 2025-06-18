@@ -1,6 +1,7 @@
 {
   "name": "tauri-plugin-mobile-share",
   "version": "0.1.0",
+  "authors": "Tactile Engineering, Inc.",
   "description": "A Package for Sharing Tauri Mobile App Content",
   "keywords": [
     "tauri",

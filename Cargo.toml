@@ -1,6 +1,7 @@
 [package]
 name = "tauri-plugin-mobile-share"
 version = "0.1.0"
+authors = ["Tactile Engineering, Inc."]
 edition = "2024"
 rust-version = "1.85.0"
 description = "A Package for Sharing Tauri Mobile App Content"
