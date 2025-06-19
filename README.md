@@ -16,9 +16,8 @@ This project exists to allow for a simple and convenient way to leverage the "sh
 
 Here's how you can install this project in your app:
 
-1. Add this line to your project's `cargo.toml`: `tauri-plugin-mobile-share = { git = "https://github.com/tactile-eng/tauri-plugin-mobile-share", branch = "release" }`
-2. Add this line to your project's `package.json` dependency section: `"plugin-mobile-share": "tactile-eng/tauri-plugin-mobile-share#release"`
-3. Use `npm` or your preferred alternative to install stuff: `npm install`
+1. Use `cargo` to install in your tauri `src-tauri` directory: `cargo add tauri-plugin-mobile-share`
+2. Use `npm` (or your preferred alternative) to install the guest bindings in your `package.json`'s directory: `npm install tauri-plugin-mobile-share`
 
 ## Usage
 
@@ -37,17 +36,20 @@ fn main() {
 
 Afterwards all the plugin's APIs are available through the JavaScript guest bindings:
 
-```javascript
-import { shareText, shareBinary } from "plugin-mobile-share";
+```ts
+import { shareBinary, shareText } from "tauri-plugin-mobile-share";
+import type { ShareMeta } from "tauri-plugin-mobile-share";
 
-/** Text Document data is just a string, so...that's pretty simple */
-shareText(textData, { name: "My File", ext: "txt" });
+const textData = "lorem ipsum dolor sit amet...";
+const textMetadata: ShareMeta = { name: "My File", ext: "txt" };
 
-/**
- * binary data must be encoded as a base64 string, so assuming you have some `file` of type `Blob`:
- * `const base64String = Buffer.from(await file.arrayBuffer()).toString("base64")`
- */
-shareBinary(binaryData, { name: "My File", ext: "png" });
+shareText(textData, textMetadata);
+
+const file: Blob; // not included: your Blob file...
+const binaryData = Buffer.from(await file.readBinary()).toString("base64");
+const binaryMetadata: ShareMeta = { name: "My File", ext: "png" };
+
+shareBinary(binaryData, binaryMetadata);
 ```
 
 ## TODO

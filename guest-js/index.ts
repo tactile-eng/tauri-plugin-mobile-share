@@ -1,13 +1,21 @@
 import { invoke } from "@tauri-apps/api/core";
 
-type Meta = {
-    name: string; ext: string
+export type ShareMeta = {
+    name: string;
+    ext: string;
 }
 
-export function shareText(payload: { text: string; meta: Meta }) {
+/** Text Document data is just a string, so...that's pretty simple */
+export function shareText(payload: { text: string; meta: ShareMeta }) {
     return invoke<void>("plugin:mobile-share|share_text", payload);
 }
 
-export function shareBinary(payload: { data: string; meta: Meta }) {
+/**
+ * binary data must be encoded as a base64 string, so assuming you have some `file` of type `Blob`:
+ * ```js
+ * const data = Buffer.from(await file.arrayBuffer()).toString("base64")
+ * ```
+ */
+export function shareBinary(payload: { data: string; meta: ShareMeta }) {
     return invoke<void>("plugin:mobile-share|share_binary", payload);
 }

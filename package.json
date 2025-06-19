@@ -11,7 +11,10 @@
   ],
   "bugs": "https://github.com/tactile-eng/tauri-plugin-mobile-share/issues",
   "homepage": "https://github.com/tactile-eng/tauri-plugin-mobile-share",
-  "repository": "tactile-eng/tauri-plugin-mobile-share",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tactile-eng/tauri-plugin-mobile-share.git"
+  },
   "license": "(MIT OR Apache-2.0)",
   "type": "module",
   "types": "./dist-js/index.d.ts",
