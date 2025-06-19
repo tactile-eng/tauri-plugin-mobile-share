@@ -45,8 +45,8 @@ const textMetadata: ShareMeta = { name: "My File", ext: "txt" };
 
 shareText(textData, textMetadata);
 
-const file: Blob; // not included: your Blob file...
-const binaryData = Buffer.from(await file.readBinary()).toString("base64");
+const data: ArrayBuffer; // not included: your file data...
+const binaryData = Buffer.from(data).toString("base64");
 const binaryMetadata: ShareMeta = { name: "My File", ext: "png" };
 
 shareBinary(binaryData, binaryMetadata);

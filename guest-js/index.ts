@@ -5,17 +5,35 @@ export type ShareMeta = {
     ext: string;
 }
 
-/** Text Document data is just a string, so...that's pretty simple */
-export function shareText(payload: { text: string; meta: ShareMeta }) {
-    return invoke<void>("plugin:mobile-share|share_text", payload);
+/**
+ * 
+ * ## Example:
+ * ```ts
+ * import { ShareMeta, shareText } from "tauri-plugin-mobile-share";
+ * 
+ * const textData = "lorem ipsum dolor sit amet...";
+ * const textMetadata: ShareMeta = { name: "My File", ext: "txt" };
+ * 
+ * shareText(textData, textMetadata);
+ * ```
+ */
+export function shareText(text: string, meta: ShareMeta) {
+    return invoke<void>("plugin:mobile-share|share_text", { text, meta });
 }
 
 /**
- * binary data must be encoded as a base64 string, so assuming you have some `file` of type `Blob`:
- * ```js
- * const data = Buffer.from(await file.arrayBuffer()).toString("base64")
+ * 
+ * ## Example:
+ * ```ts
+ * import { shareBinary, ShareMeta } from "tauri-plugin-mobile-share";
+ * 
+ * const data: ArrayBuffer; // not included: your file data...
+ * const binaryData = Buffer.from(data).toString("base64");
+ * const binaryMetadata: ShareMeta = { name: "My File", ext: "png" };
+ * 
+ * shareBinary(binaryData, binaryMetadata);
  * ```
  */
-export function shareBinary(payload: { data: string; meta: ShareMeta }) {
-    return invoke<void>("plugin:mobile-share|share_binary", payload);
+export function shareBinary(data: string, meta: ShareMeta) {
+    return invoke<void>("plugin:mobile-share|share_binary", { data, meta });
 }
