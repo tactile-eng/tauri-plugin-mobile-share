@@ -34,9 +34,23 @@ fn main() {
 }
 ```
 
-Afterwards all the plugin's APIs are available through the JavaScript guest bindings:
+Then, you'll need to allow usage of the plugin by Tauri:
 
-```ts
+`src-tauri/capabilities/base.json`
+
+```json
+{
+    ...
+    "permissions": [
+        ...,
+        "mobile-share:default"
+    ]
+}
+```
+
+Afterwards all the plugin's APIs are available through the JavaScript guest bindings (with type data):
+
+```typescript
 import { shareBinary, shareText } from "tauri-plugin-mobile-share";
 import type { ShareMeta } from "tauri-plugin-mobile-share";
 
